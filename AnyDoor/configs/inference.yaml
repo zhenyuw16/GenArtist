@@ -1,0 +1,3 @@
+pretrained_model: AnyDoor/path/epoch=1-step=8687.ckpt
+config_file: AnyDoor/configs/anydoor.yaml
+save_memory: False
