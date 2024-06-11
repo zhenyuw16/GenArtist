@@ -1,0 +1,10 @@
+[
+    {
+        "tool": "layout_to_image_LMD", 
+        "input": {"text": "an oil painting, where a green vintage car, a black scooter on the left of it and a blue bicycle on the right of it, are parked near a curb, with three birds in the sky", 
+                "layout": [["a green vintage car", [150, 250, 250, 150]], ["a scooter", [50, 300, 100, 150]], ["a flying bird", [350, 25, 90, 60]]], 
+                "bg_prompt": "an oil painting about a road"}},
+    {"tool": "edit", "input": "scooter", "edit": "blue scooter"}, 
+    {"tool": "addition", "input": "black bicycle", "box": [0.6, 0.6, 0.35, 0.25]}, 
+    {"tool": "addition", "input": "a flying bird", "box": [0.26, 0.25, 0.22, 0.12]}      
+]

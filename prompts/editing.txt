@@ -1,0 +1,27 @@
+I will ask you to perform the general image editing task, your job is to come up with a series of simple commands in Python that will perform the task.
+To help you, I will give you access to a set of tools that you can use. Each tool is a Python function and has a description explaining the task it performs and its characteristic, the inputs it expects and the outputs it returns.
+You should choose the tool you will use to perform the task, write the code in Python.
+
+Tools:
+- instruction_editing_MagicBrush: This is a tool that edits an image given the text instruction. It takes the image that requires to be edited named ‘image’, the text instruction named `text`. It returns an image that matches to the text description.
+- addition_anydoor: This is a tool that adds a given object to the given region of an image. It takes an input named `image` which is the image that requires to be edited, an input named ‘object’ which is the given object that requires to be added, and an input named ‘mask’ which is the binary mask that is the region where the object should appear.
+- remove_lama: This is a tool that removes a given object from an image. It takes an input named `image` which is the image that requires to be edited, an input named ‘object’ which can either be a text that describes the object, or the binary mask that indicates the region where the object should appear.
+- attribute_diffedit: This is a tool that edits the attribute of a given object, like its color, shape from an image. It takes an input named `image` which is the image that requires to be edited, an input named ‘object’ which can either be a text that describes the object, or the binary mask that indicates the region where the object should appear, and an input named ‘attr’, which is the new object attribute after editing.
+- replace_anydoor: This is a tool that replaces a given object to the given region of an image with a new object. It takes an input named `image` which is the image that requires to be edited, an input named ‘object’ which is the new object, and an input named ‘mask’ which is the binary mask that is the region of the old object.
+- drag_dragondiffusion: This is a tool that edits an image by dragging one object from one place to another. It takes an input named `image` which is the image that requires to be edited, an input named ‘p1’ which is the old place of the object, and an input named ‘p2’ which is the new place of the object.
+
+Note that tools like addition_anydoor, replace_anydoor requires mask as input to indicate the object position. This mask can be automated generated. Choose the most suitable tool to use. Use “TBG” to denote that the input requires to be automated generated. This mask input can also be a bounding box, with the format as [ top - left x coordinate , top - left y coordinate , box width , box height ], where the coordinates are normalized to 0 ~ 1. 
+
+Input: “add fireworks to the sky", “e1.png”
+Answer: {“tool”: “instruction_editing_MagicBrush”, “input”: {“text”: “add fireworks to the sky ", “image”: “e1.png”} }
+
+Input: “add a red dog to the right”, “e1.png”, “o1.png”, “mask1.png”
+Answer: {“tool”: “addition_anydoor”, “input”: {“image”: “e1.png", “object”: “o1.png”, “mask”: “mask1.png”} }
+
+Input: “remove the dog from the image”, “e1.png”
+Answer: {“tool”: “remove_lama”, “input”: {“image”: “e1.png", “object”: “dog”} }
+
+Input: “edit the red bike to blue”, “e1.png”
+Answer: {“tool”: “attribute_diffedit”, “input”: {“image”: “e1.png", “object”: “bike”, “attr”: “blue bike”} }
+
+Input: {prompt}

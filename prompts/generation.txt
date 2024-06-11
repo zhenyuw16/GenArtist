@@ -1,0 +1,44 @@
+I will ask you to perform the general image generation task, your job is to come up with a series of simple commands in Python that will perform the task.
+To help you, I will give you access to a set of tools that you can use. Each tool is a Python function and has a description explaining the task it performs and its characteristic, the inputs it expects and the outputs it returns.
+You should choose the tool you will use to perform the task, write the code in Python.
+
+Tools:
+- text_to_image_SDXL: This is a tool that generates an image given the text description. It takes a text that describes the image named `text`. It returns an image that matches to the text description.
+- image_to_image_SD2: This is a tool that generates an image given the text description and an initial image. It takes an input named `text` which describes the generated image and an input named ‘image’ which describes the initial image to begin with, and returns an image that matches to the text description.
+- customization_BLIPDiffusion: This is a tool that performs single-concept customized image generation. It takes an input named `image` which is the personalized concept that requires to be generated, as well as a `text` which describes the generated image containing the given concept. It returns an image that matches to the text description and contains the input concept.
+- customization_eclipse: This is a tool that performs multi-concept customized image generation. It takes an input named `images` which is a list that contains all personalized concepts that requires to be generated, as well as a `text` which describes the generated image containing the given concept. It returns an image that matches to the text description and contains all input concepts.
+- text_to_image_textdiffusion: This is a tool that generates an image given the text description. The text description also involves a text that requires to be generated within the image. It takes a text that describes the image named `text`. It returns an image that matches to the text description.
+- layout_to_image_LMD: This is a tool that generates an image given the scene layout through the format of object bounding boxes and the text description. It takes a text that describes the image named `text`, and the scene layout named ‘layout’. It returns an image that matches to the text description and the scene layout. Note that this tool is suitable for texts with multiple objects, and it is easy to preserve object attributes like color, shape, texture of the multiple objects. Its control on scene layout is relatively strict.
+- layout_to_image_BoxDiff: This is a tool that generates an image given the scene layout through the format of object bounding boxes and the text description. It takes a text that describes the image named `text`, and the scene layout named ‘layout’. It returns an image that matches to the text description and the scene layout. Note that this tool’s control on scene layout is relatively loose, thus can be flexible for action generation between multiple objects, like playing, jumping.
+- superresolution_SDXL: This is a tool that generates a high-resolution image given a low-resolution image. It takes an input named `image` which is low-resolution and returns an image that is high-resolution.
+- controlnet_canny: This is a tool that generates an image given the canny edge map and a text description. It takes a text that describes the image named `text`, and the canny edge map named ‘map. It returns an image that matches to the text description and the canny map.
+- controlnet_{depth, hed, mlsd, normal, openpose, scribble, seg}: This is a tool that generates an image given the {depth, hed, mlsd, normal, openpose, scribble, segmentation} map and a text description. It takes a text that describes the image named `text`, and the corresponding map named ‘map. It returns an image that matches to the text description and the corresponding map.
+
+Note that scene layout, controlnet input map can be automated generated. Choose the most suitable tool to use. Use “TBG” to denote that the input requires to be automated generated.
+
+Input: “a close-up of a fire spitting dragon, cinematic shot"
+Answer: {“tool”: “text_to_image_SDXL”, “input”: {“text”: “a close-up of a fire spitting dragon, cinematic shot"} }
+
+
+Input: “Astronaut in a jungle, cold color palette, muted colors, detailed, 8k”, “e1.png”
+Answer: {“tool”: “image_to_image_SD2”, “input”: {“text”: “Astronaut in a jungle, cold color palette, muted colors, detailed, 8k", “image”: “e1.png”} }
+
+Input: “a red book and a yellow vase”
+Answer: {“tool”: “layout_to_image_LMD”, “input”: {“text”: “a red book and a yellow vase", “layout”: “TBG”} }
+
+Input: “A woman is holding a camera and taking photos of a beautiful landscape.”
+Answer: {“tool”: “layout_to_image_BoxDiff”, “input”: {“text”: “A woman is holding a camera and taking photos of a beautiful landscape.", “layout”: “TBG”} }
+
+Input: “a dog with the same pose as the given cat”, “e1.png”
+Answer: {“tool”: “controlnet_openpose”, “input”: {“text”: “a dog with the same pose as the given cat.", “map”: “TBG”, “image”: “e1.png”} }
+
+Input: “the cat is wearing the blue glass, according to the given images”, “e1.png”, “e2.png”
+Answer: {“tool”: “customization_eclipse”, “input”: {“text”: “the cat is wearing the blue glass", “images”: [“e1.png”, “e2.png”] } }
+
+Input: “a blue cube directly above a red cube with a vase on the left of them", "[('a blue cube', [202, 120, 110, 110]), ('a red cube', [202, 230, 110, 110]), ('a vase', [62, 190, 80, 150])]”
+Answer: {“tool”: “layout_to_image_LMD”, “input”: {“text”: “a blue cube directly above a red cube with a vase on the left of them ", “layout”: “[('a blue cube', [202, 120, 110, 110]), ('a red cube', [202, 230, 110, 110]), ('a vase', [62, 190, 80, 150])]”} }
+
+Input: “a boy draws good morning on a board”
+Answer: {“tool”: “text_to_image_textdiffusion”, “input”: {“text”: “a boy draws good morning on a board"} }
+
+Input: {prompt}

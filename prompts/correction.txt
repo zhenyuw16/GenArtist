@@ -1,0 +1,19 @@
+I will ask you to correct the image given the text. The image should correspond to the text. Your job is to judge whether the image correctly conforms to the description of the text. The main aspect involves the objects contained in the text, together with their own attributes like their color, shape, texture, the positions of the objects, the relationship among these different objects, the background or the scene of the image.
+For example, for the text “A realistic photo with a monkey sitting above a green motorcycle on the left and another raccoon sitting above a blue motorcycle on the right”, the image should contain a monkey, a raccoon, a green motorcycle, a blue cycle. The position of the monkey is on the left, the raccoon is on the right. The monkey and the raccoon should sit on the motorcycles. The photo should be a realistic scene, rather than oil painting style or others.
+I will give you access to a set of tools that you can use. Each tool is a Python function and has a description explaining the task it performs and its characteristic, the inputs it expects and the outputs it returns. Your job is to come up with a series of simple commands in Python that will ultimately correct the image.
+
+Tools:
+{“tool”: “addition”, “input”: “a red book”, “box”: [0.17, 0.33, 0.1, 0.180]}. It can add the “input” item (like the red book) to the image. The “box” item is the region where the input should be added to the image. This position are specified through the bounding box format [ top - left x coordinate , top - left y coordinate , box width , box height ]. The images are of size 512 x512 , the coordinates are normalized to 0 ~ 1, and the bounding boxes should not overlap or go beyond the image boundaries .
+{“tool”: “remove”, “input”: “a blue dog”}. It can remove the “input” item (like the blue dog) from the image.
+{“tool”: “move”, “input”: “a bird”, “box”: [0.32, 0.27, 0.8, 0.6]}. It can move the “input” item (a cat) to the new position in the image. The position are specified through the bounding box format [ top - left x coordinate , top - left y coordinate , box width , box height ]. The images are of size 512 x512 , and the bounding boxes should not overlap or go beyond the image boundaries .
+{“tool”: “edit”, “input”: “a blue dog”, “edit”: “a red dog”}. It can edit the attribute of the “input” item to the “edit” item.
+{“tool”: “instruction”, “input”: “add fireworks to the sky”}. It can edit the image through the description of the instruction. 
+Note that if you use the addition of move tool, you should automatically decide the bounding box position according to the input image. 
+
+
+########################################################################
+An example:
+
+text: An oil painting at the beach, a blue bicycle to the left of a bench and to the right of a palm tree, with three seagulls in the sky. 
+I can give you the position of all objects in the image: bird: [0.39, 0.02, 0.23, 0.17], chair bench: [0.48, 0.58, 0.52, 0.35], wheel tire: [0.07, 0.67, 0.17, 0.23], wheel tire: [0.25, 0.68, 0.18, 0.24], bicycle: [0.07, 0.61, 0.36, 0.32], water: [0.0, 0.43, 1.0, 0.21], sky: [0.0, 0.0, 1.0, 0.44], wing: [0.52, 0.03, 0.1, 0.09], tree: [0.14, 0.21, 0.26, 0.58]. 
+You can use these as a reference for generating the bounding box position of objects

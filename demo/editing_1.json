@@ -1,0 +1,4 @@
+[
+    {"tool": "instruction", "text": "Have there be a stream running through the field" },
+    {"tool": "addition", "input": "giraffe", "box": [0.37, 0.37, 0.2, 0.23]},
+    {"tool": "instruction", "text": "Add a supernova explosion in the sky" }] 
