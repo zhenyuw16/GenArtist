@@ -1,7 +1,7 @@
 # GenArtist
 
 This repo provides the official code of our NeurIPS 2024 spotlight paper:
-> [**GenArtist: Multimodal LLM as an Agent for Unified Image Generation and Editing**](https://arxiv.org/),        
+> [**GenArtist: Multimodal LLM as an Agent for Unified Image Generation and Editing**](https://arxiv.org/abs/2407.05600),        
 
 We propose GenArtist, a unified image generation and editing system, coordinated by a multimodal large language model (MLLM) agent.
 In GenArtist:
