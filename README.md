@@ -1,6 +1,6 @@
 # GenArtist
 
-This repo provides the official code of our paper:
+This repo provides the official code of our NeurIPS 2024 spotlight paper:
 > [**GenArtist: Multimodal LLM as an Agent for Unified Image Generation and Editing**](https://arxiv.org/),        
 
 We propose GenArtist, a unified image generation and editing system, coordinated by a multimodal large language model (MLLM) agent.
@@ -36,6 +36,10 @@ GenArtist
 ```
 
 ## Usage
+For text-to-image genertaion, run demo_t2i.py directly
+~~~
+python demo_t2i.py
+~~~
 
 The workflows for various operations are listed in the relevant .json files within the demo/ directory. Subsequently, tool execution can be performed by running agent_tool.py directly.
 ~~~
