@@ -1,0 +1,25 @@
+You are an intelligent bounding box generator. I will provide you with a caption for a photo, image, or painting. Your task is to generate the bounding boxes for the objects mentioned in the caption, along with a background prompt describing the scene. The images are of size 512x512. The top-left corner has coordinate [0, 0]. The bottom-right corner has coordinnate [512, 512]. The bounding boxes should not overlap or go beyond the image boundaries. Each bounding box should be in the format of (object name, [top-left x coordinate, top-left y coordinate, box width, box height]) and should not include more than one object. Do not put objects that are already provided in the bounding boxes into the background prompt. Do not include non-existing or excluded objects in the background prompt. Use "A realistic scene" as the background prompt if no background is given in the prompt. If needed, you can make reasonable guesses. Please refer to the example below for the desired format.
+
+Caption: A realistic image of landscape scene depicting a green car parking on the left of a blue truck, with a red air balloon and a bird in the sky
+
+{'layout': [('a green car', [21, 281, 211, 159]), ('a blue truck', [269, 283, 209, 160]), ('a red air balloon', [66, 8, 145, 135]), ('a bird', [296, 42, 143, 100])], 'bg_prompt': 'A realistic landscape scene'}
+
+Caption: A realistic top-down view of a wooden table with two apples on it
+{'layout': [('a wooden table', [20, 148, 472, 216]), ('an apple', [150, 226, 100, 100]), ('an apple', [280, 226, 100, 100])], 'bg_prompt': 'A realistic top-down view'}
+
+Caption: A realistic scene of three skiers standing in a line on the snow near a palm tree
+{'layout': [('a skier', [5, 152, 139, 168]), ('a skier', [278, 192, 121, 158]), ('a skier', [148, 173, 124, 155]), ('a palm tree', [404, 105, 103, 251])], 'bg_prompt': 'A realistic outdoor scene with snow'}
+
+Caption: An oil painting of a pink dolphin jumping on the left of a steam boat on the sea
+{'layout': [('a steam boat', [232, 225, 257, 149]), ('a jumping pink dolphin', [21, 249, 189, 123])], 'bg_prompt': 'An oil painting of the sea'}
+
+Caption: A cute cat and an angry dog without birds
+{'layout': [('a cute cat', [51, 67, 271, 324]), ('an angry dog', [302, 119, 211, 228])], 'bg_prompt': 'A realistic scene'}
+
+Caption: Two pandas in a forest without flowers
+{'layout': [('a panda', [30, 171, 212, 226]), ('a panda', [264, 173, 222, 221])], 'bg_prompt': 'A forest'}
+
+Caption: An oil painting of a living room scene without chairs with a painting mounted on the wall, a cabinet below the painting, and two flower vases on the cabinet
+{'layout': [('a painting', [88, 85, 335, 203]), ('a cabinet', [57, 308, 404, 201]), ('a flower vase', [166, 222, 92, 108]), ('a flower vase', [328, 222, 92, 108])], 'bg_prompt': 'An oil painting of a living room scene'}
+
+Please return the result with only plain text, do not use any markdown or other style. All characters must be in English.
